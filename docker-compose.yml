@@ -1,0 +1,57 @@
+services:
+  app:
+    build: .
+    env_file: .env.${NODE_ENV:-development}
+    ports:
+      - "${APP_EXTERNAL_PORT:-3000}:${PORT:-3000}"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      central-db:
+        condition: service_healthy
+      tenant-db:
+        condition: service_healthy
+
+  central-db:
+    image: postgres:15
+    container_name: central-db
+    environment:
+      POSTGRES_USER: ${CENTRAL_DB_USER:-admin}
+      POSTGRES_PASSWORD: ${CENTRAL_DB_PASSWORD:-1234}
+      POSTGRES_DB: ${CENTRAL_DB_NAME:-mydb1}
+    ports:
+      - "${CENTRAL_DB_EXTERNAL_PORT:-5433}:5432"
+    volumes:
+      - pgdata_central_${NODE_ENV:-development}:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${CENTRAL_DB_USER:-admin} -d ${CENTRAL_DB_NAME:-mydb1}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  tenant-db:
+    image: postgres:15
+    container_name: tenant-db
+    environment:
+      POSTGRES_USER: ${TENANT_DB_USER:-admin}
+      POSTGRES_PASSWORD: ${TENANT_DB_PASSWORD:-1234}
+      POSTGRES_DB: ${TENANT_DB_NAME:-mydb2}
+    ports:
+      - "${TENANT_DB_EXTERNAL_PORT:-5434}:5432"
+    volumes:
+      - pgdata_tenant_${NODE_ENV:-development}:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${TENANT_DB_USER:-admin} -d ${TENANT_DB_NAME:-mydb2}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  pgdata_central_development:
+  pgdata_central_test:
+  pgdata_central_production:
+
+  pgdata_tenant_development:
+  pgdata_tenant_test:
+  pgdata_tenant_production:
