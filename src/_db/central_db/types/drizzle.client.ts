@@ -5,11 +5,11 @@ import {
 import * as schema from '../tables';
 import { PgTransaction } from 'drizzle-orm/pg-core';
 import { ExtractTablesWithRelations } from 'drizzle-orm';
-import { TDrizzleSchema } from './drizzle.schema';
+import { TCentralSchema } from './drizzle.schema';
 
-export type DrizzleClient = NodePgDatabase<typeof schema>;
-export type DrizzleTx = PgTransaction<
+export type CentralDbClient = NodePgDatabase<typeof schema>;
+export type CentralDbTx = PgTransaction<
   NodePgQueryResultHKT,
-  TDrizzleSchema,
+  TCentralSchema,
   ExtractTablesWithRelations<typeof schema>
 >;

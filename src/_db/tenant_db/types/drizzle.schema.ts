@@ -1,3 +1,3 @@
 import * as schema from '../tables';
 
-export type TDrizzleSchema = typeof schema;
+export type TTenantSchema = typeof schema;
