@@ -9,6 +9,7 @@ import { TenantDbModule } from './_db/tenant_db/tenant.db.module';
 import { OrganizationRepositoryModule } from './repositories/organization-repository/organization-repository.module';
 import { TenantModule } from './tenant/tenant.module';
 import { CentralDbModule } from './_db/central_db/central_db.module';
+import { OrganizationModule } from './api/organization/organization.module';
 import configuration from './_config/configuration';
 
 @Module({
@@ -25,6 +26,7 @@ import configuration from './_config/configuration';
     TenantModule,
     TenantDbModule,
     CentralDbModule,
+    OrganizationModule,
   ],
   controllers: [AppController],
   providers: [

@@ -1,0 +1,31 @@
+import * as dotenv from 'dotenv';
+import { defineConfig } from 'drizzle-kit';
+
+dotenv.config();
+
+// const databaseUrl = process.env.DATABASE_URL;
+// if (!databaseUrl) {
+//   throw new Error('DATABASE_URL is missing in environment variables');
+// }
+// console.log({ databaseUrl });
+
+export default defineConfig({
+  schema: './src/_db/central_db/tables',
+  out: './src/_db/central_db/migrations',
+  dialect: 'postgresql',
+  dbCredentials: {
+    // url: databaseUrl,
+    host: process.env.CENTRAL_DB_HOST || 'localhost',
+    port: parseInt(process.env.CENTRAL_DB_PORT || '5432'),
+    user: process.env.CENTRAL_DB_USER || 'postgres',
+    password: process.env.CENTRAL_DB_PASSWORD || 'postgres',
+    database: process.env.CENTRAL_DB_NAME || 'mydb',
+    ssl: process.env.NODE_ENV === 'production',
+  },
+  verbose: true,
+  strict: true,
+  migrations: {
+    table: 'drizzle_migrations',
+    // tableName: 'drizzle_migrations',
+  },
+});

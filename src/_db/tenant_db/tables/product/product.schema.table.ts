@@ -19,6 +19,8 @@ const productColumns = {
 
 const tableName = 'products';
 
+export const productTable = pgTable(tableName, productColumns);
+
 export const productTableInfo = {
   key: 'productTable',
   table: pgTable(tableName, productColumns),

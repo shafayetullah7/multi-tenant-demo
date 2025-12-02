@@ -21,6 +21,8 @@ const userColumns = {
 
 const userTableName = 'users';
 
+export const userTable = pgTable(userTableName, userColumns);
+
 export const userTableInfo = {
   key: 'userTable',
   table: pgTable(userTableName, userColumns),

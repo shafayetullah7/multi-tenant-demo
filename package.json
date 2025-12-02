@@ -28,15 +28,12 @@
     "docker:logs": "sudo docker compose logs -f app",
     "docker:logs:prod": "NODE_ENV=production sudo docker compose logs -f app",
     "docker:purge": "sudo docker compose down -v --remove-orphans --rmi local",
-
     "db:generate:central": "drizzle-kit generate --config drizzle.central.config.ts",
     "db:migrate:central": "drizzle-kit migrate --config drizzle.central.config.ts",
     "db:studio:central": "drizzle-kit studio --config drizzle.central.config.ts",
-
     "db:generate:tenant": "drizzle-kit generate --config drizzle.tenant.config.ts",
     "db:migrate:tenant": "drizzle-kit migrate --config drizzle.tenant.config.ts",
     "db:studio:tenant": "drizzle-kit studio --config drizzle.tenant.config.ts",
-
     "db:migrate:central:docker": "sudo docker compose exec app npm run db:migrate:central",
     "db:migrate:tenant:docker": "sudo docker compose exec app npm run db:migrate:tenant",
     "db:studio:central:docker": "sudo docker compose exec app npm run db:studio:central",
@@ -52,7 +49,8 @@
     "nestjs-zod": "^5.0.1",
     "pg": "^8.16.3",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "zod": "^4.1.13"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
