@@ -2,7 +2,7 @@ import { Global, Module } from '@nestjs/common';
 import { AppConfigService } from 'src/_config/app-config/app-config.service';
 import { Pool } from 'pg';
 import { drizzle, NodePgDatabase } from 'drizzle-orm/node-postgres';
-import * as schema from './tables';
+import * as schema from '../tenant_db/tables';
 import { CENTRAL_DB } from './constants/drizzle.token';
 import { CentralDB } from './central_db.service';
 
