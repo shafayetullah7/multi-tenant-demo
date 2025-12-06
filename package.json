@@ -28,16 +28,11 @@
     "docker:logs": "sudo docker compose logs -f app",
     "docker:logs:prod": "NODE_ENV=production sudo docker compose logs -f app",
     "docker:purge": "sudo docker compose down -v --remove-orphans --rmi local",
-    "db:generate:central": "drizzle-kit generate --config drizzle.central.config.ts",
-    "db:migrate:central": "drizzle-kit migrate --config drizzle.central.config.ts",
-    "db:studio:central": "drizzle-kit studio --config drizzle.central.config.ts",
-    "db:generate:tenant": "drizzle-kit generate --config drizzle.tenant.config.ts",
-    "db:migrate:tenant": "drizzle-kit migrate --config drizzle.tenant.config.ts",
-    "db:studio:tenant": "drizzle-kit studio --config drizzle.tenant.config.ts",
-    "db:migrate:central:docker": "sudo docker compose exec app npm run db:migrate:central",
-    "db:migrate:tenant:docker": "sudo docker compose exec app npm run db:migrate:tenant",
-    "db:studio:central:docker": "sudo docker compose exec app npm run db:studio:central",
-    "db:studio:tenant:docker": "sudo docker compose exec app npm run db:studio:tenant"
+    "db:generate": "drizzle-kit generate --config drizzle.config.ts",
+    "db:migrate": "drizzle-kit migrate --config drizzle.config.ts",
+    "db:studio": "drizzle-kit studio --config drizzle.config.ts",
+    "db:migrate:docker": "sudo docker compose exec app npm run db:migrate",
+    "db:studio:docker": "sudo docker compose exec app npm run db:studio"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",

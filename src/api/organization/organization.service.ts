@@ -19,7 +19,7 @@ export class OrganizationService {
           tx,
           lock: false,
         });
-        
+
       if (existingOrganization) {
         throw new ConflictException(
           'Organization with this name already exists',
@@ -34,6 +34,11 @@ export class OrganizationService {
       return newOrganization;
     });
 
+    return result;
+  }
+
+  async getOrganizations(): Promise<TOrganization[]> {
+    const result = await this.organizationRepo.getOrganizations();
     return result;
   }
 }

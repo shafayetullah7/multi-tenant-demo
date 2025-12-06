@@ -19,23 +19,23 @@ export class AppConfigService {
   }
 
   // === CENTRAL DATABASE ===
-  get centralDbHost(): AppEnv['CENTRAL_DB_HOST'] {
-    return this.configService.getOrThrow('CENTRAL_DB_HOST');
+  get dbHost(): AppEnv['DB_HOST'] {
+    return this.configService.getOrThrow('DB_HOST');
   }
-  get centralDbPort(): AppEnv['CENTRAL_DB_PORT'] {
-    return this.configService.getOrThrow('CENTRAL_DB_PORT');
+  get dbPort(): AppEnv['DB_PORT'] {
+    return this.configService.getOrThrow('DB_PORT');
   }
-  get centralDbUser(): AppEnv['CENTRAL_DB_USER'] {
-    return this.configService.getOrThrow('CENTRAL_DB_USER');
+  get dbUser(): AppEnv['DB_USER'] {
+    return this.configService.getOrThrow('DB_USER');
   }
-  get centralDbPassword(): AppEnv['CENTRAL_DB_PASSWORD'] {
-    return this.configService.getOrThrow('CENTRAL_DB_PASSWORD');
+  get dbPassword(): AppEnv['DB_PASSWORD'] {
+    return this.configService.getOrThrow('DB_PASSWORD');
   }
-  get centralDbName(): AppEnv['CENTRAL_DB_NAME'] {
-    return this.configService.getOrThrow('CENTRAL_DB_NAME');
+  get dbName(): AppEnv['DB_NAME'] {
+    return this.configService.getOrThrow('DB_NAME');
   }
-  get centralDbUrl(): AppEnv['CENTRAL_DATABASE_URL'] {
-    return this.configService.getOrThrow('CENTRAL_DATABASE_URL');
+  get dbUrl(): AppEnv['DATABASE_URL'] {
+    return this.configService.getOrThrow('DATABASE_URL');
   }
 
   // === Docker ===

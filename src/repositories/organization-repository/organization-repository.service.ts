@@ -15,14 +15,18 @@ export class OrganizationRepositoryService {
 
   async createOrganization(
     payload: TNewOrganization,
-    centralTx: DrizzleTx,
+    tx: DrizzleTx,
   ): Promise<TOrganization> {
-    const [newOrganization] = await centralTx
+    const [newOrganization] = await tx
       .insert(organizationTable)
       .values(payload)
       .returning();
 
     return newOrganization;
+  }
+
+  async getOrganizations(): Promise<TOrganization[]> {
+    return await this.db.client.select().from(organizationTable).execute();
   }
 
   async getOrganizationByName(

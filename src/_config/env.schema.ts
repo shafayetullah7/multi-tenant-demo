@@ -9,12 +9,12 @@ export const envSchema = z
     APP_NAME: z.string().default('my-nest-app'),
 
     // === CENTRAL DB ===
-    CENTRAL_DB_HOST: z.string(),
-    CENTRAL_DB_PORT: z.coerce.number().default(5432),
-    CENTRAL_DB_USER: z.string(),
-    CENTRAL_DB_PASSWORD: z.string(),
-    CENTRAL_DB_NAME: z.string(),
-    CENTRAL_DATABASE_URL: z.string().url().optional(),
+    DB_HOST: z.string(),
+    DB_PORT: z.coerce.number().default(5432),
+    DB_USER: z.string(),
+    DB_PASSWORD: z.string(),
+    DB_NAME: z.string(),
+    DATABASE_URL: z.string().url().optional(),
 
     // === Docker Compose ===
     COMPOSE_PROJECT_NAME: z.string().default('myapp'),
@@ -25,10 +25,10 @@ export const envSchema = z
   })
   .transform((data) => {
     // Build CENTRAL DB URL if missing
-    if (!data.CENTRAL_DATABASE_URL) {
-      data.CENTRAL_DATABASE_URL =
-        `postgres://${data.CENTRAL_DB_USER}:${data.CENTRAL_DB_PASSWORD}` +
-        `@${data.CENTRAL_DB_HOST}:${data.CENTRAL_DB_PORT}/${data.CENTRAL_DB_NAME}`;
+    if (!data.DATABASE_URL) {
+      data.DATABASE_URL =
+        `postgres://${data.DB_USER}:${data.DB_PASSWORD}` +
+        `@${data.DB_HOST}:${data.DB_PORT}/${data.DB_NAME}`;
     }
 
     return data;

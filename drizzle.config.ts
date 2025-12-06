@@ -10,16 +10,16 @@ dotenv.config();
 // console.log({ databaseUrl });
 
 export default defineConfig({
-  schema: './src/_db/central_db/tables',
-  out: './src/_db/central_db/migrations',
+  schema: './src/_db/drizzle/tables',
+  out: './src/_db/drizzle/migrations',
   dialect: 'postgresql',
   dbCredentials: {
     // url: databaseUrl,
-    host: process.env.CENTRAL_DB_HOST || 'localhost',
-    port: parseInt(process.env.CENTRAL_DB_PORT || '5432'),
-    user: process.env.CENTRAL_DB_USER || 'postgres',
-    password: process.env.CENTRAL_DB_PASSWORD || 'postgres',
-    database: process.env.CENTRAL_DB_NAME || 'mydb',
+    host: process.env.DB_HOST || 'localhost',
+    port: parseInt(process.env.DB_PORT || '5432'),
+    user: process.env.DB_USER || 'postgres',
+    password: process.env.DB_PASSWORD || 'postgres',
+    database: process.env.DB_NAME || 'mydb',
     ssl: process.env.NODE_ENV === 'production',
   },
   verbose: true,

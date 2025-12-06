@@ -14,14 +14,13 @@ import { DrizzleService } from './drizzle.service';
       inject: [AppConfigService],
       // eslint-disable-next-line @typescript-eslint/require-await
       useFactory: async (configService: AppConfigService) => {
-        const dbHost = configService.centralDbHost;
-        const dbPort = configService.centralDbPort;
-        const dbUser = configService.centralDbUser;
-        const dbPass = configService.centralDbPassword;
-        const dbName = configService.centralDbName;
+        const dbHost = configService.dbHost;
+        const dbPort = configService.dbPort;
+        const dbUser = configService.dbUser;
+        const dbPass = configService.dbPassword;
+        const dbName = configService.dbName;
 
         const pool = new Pool({
-          //   connectionString,
           host: dbHost,
           port: dbPort,
           user: dbUser,
@@ -42,7 +41,6 @@ import { DrizzleService } from './drizzle.service';
 
         return drizzle(pool, {
           schema,
-          // logger: configService.get('NODE_ENV') !== 'production', // Enable SQL logging in dev
         }) as NodePgDatabase<typeof schema>;
       },
     },

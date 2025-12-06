@@ -14,6 +14,8 @@ export class OrganizationController {
 
   @Get()
   async getOrganizations() {
-    return 'organizations';
+    const result = await this.organizationService.getOrganizations();
+
+    return result;
   }
 }
