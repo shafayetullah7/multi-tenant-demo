@@ -25,6 +25,7 @@
     "docker:prod": "NODE_ENV=production sudo docker compose up -d --remove-orphans",
     "docker:prod:build": "NODE_ENV=production sudo docker compose build --no-cache",
     "docker:down": "sudo docker compose down",
+    "docker:down:clean": "sudo docker compose down -v",
     "docker:logs": "sudo docker compose logs -f app",
     "docker:logs:prod": "NODE_ENV=production sudo docker compose logs -f app",
     "docker:purge": "sudo docker compose down -v --remove-orphans --rmi local",
