@@ -5,10 +5,9 @@ import { APP_PIPE } from '@nestjs/core';
 import { ZodValidationPipe } from 'nestjs-zod';
 import { ConfigModule } from '@nestjs/config';
 import { AppConfigModule } from './_config/app-config/app-config.module';
-import { TenantDbModule } from './_db/tenant_db/tenant.db.module';
 import { OrganizationRepositoryModule } from './repositories/organization-repository/organization-repository.module';
 import { TenantModule } from './tenant/tenant.module';
-import { CentralDbModule } from './_db/central_db/central_db.module';
+import { CentralDbModule } from './_db/drizzle/drizzle.module';
 import { OrganizationModule } from './api/organization/organization.module';
 import configuration from './_config/configuration';
 
@@ -24,7 +23,6 @@ import configuration from './_config/configuration';
     AppConfigModule,
     OrganizationRepositoryModule,
     TenantModule,
-    TenantDbModule,
     CentralDbModule,
     OrganizationModule,
   ],

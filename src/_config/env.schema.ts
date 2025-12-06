@@ -16,14 +16,6 @@ export const envSchema = z
     CENTRAL_DB_NAME: z.string(),
     CENTRAL_DATABASE_URL: z.string().url().optional(),
 
-    // === TENANT DB ===
-    TENANT_DB_HOST: z.string(),
-    TENANT_DB_PORT: z.coerce.number().default(5432),
-    TENANT_DB_USER: z.string(),
-    TENANT_DB_PASSWORD: z.string(),
-    TENANT_DB_NAME: z.string(),
-    TENANT_DATABASE_URL: z.string().url().optional(),
-
     // === Docker Compose ===
     COMPOSE_PROJECT_NAME: z.string().default('myapp'),
     APP_EXTERNAL_PORT: z.coerce.number().default(3000),
@@ -37,13 +29,6 @@ export const envSchema = z
       data.CENTRAL_DATABASE_URL =
         `postgres://${data.CENTRAL_DB_USER}:${data.CENTRAL_DB_PASSWORD}` +
         `@${data.CENTRAL_DB_HOST}:${data.CENTRAL_DB_PORT}/${data.CENTRAL_DB_NAME}`;
-    }
-
-    // Build TENANT DB URL if missing
-    if (!data.TENANT_DATABASE_URL) {
-      data.TENANT_DATABASE_URL =
-        `postgres://${data.TENANT_DB_USER}:${data.TENANT_DB_PASSWORD}` +
-        `@${data.TENANT_DB_HOST}:${data.TENANT_DB_PORT}/${data.TENANT_DB_NAME}`;
     }
 
     return data;

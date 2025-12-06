@@ -1,20 +1,19 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { TENANT_DB } from './constants/drizzle.token';
-import type { TenantDbClient,TenantDbTx } from './types/drizzle.client';
-
+import type { DrizzleClient, DrizzleTx } from './types/drizzle.client';
+import { CENTRAL_DB } from './constants/drizzle.token';
 
 @Injectable()
-export class TenantDB {
+export class DrizzleService {
   constructor(
-    @Inject(TENANT_DB)
-    private readonly db: TenantDbClient,
+    @Inject(CENTRAL_DB)
+    private readonly db: DrizzleClient,
   ) {}
 
   get client() {
     return this.db;
   }
 
-  async transaction<T>(callback: (tx: TenantDbTx) => Promise<T>): Promise<T> {
+  async transaction<T>(callback: (tx: DrizzleTx) => Promise<T>): Promise<T> {
     return await this.db.transaction(async (tx) => {
       try {
         const result = await callback(tx);
@@ -26,7 +25,7 @@ export class TenantDB {
     });
   }
 
-  getExecutor(tx?: TenantDbTx) {
+  getExecutor(tx?: DrizzleTx) {
     return tx ?? this.db;
   }
 }

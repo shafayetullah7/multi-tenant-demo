@@ -38,26 +38,6 @@ export class AppConfigService {
     return this.configService.getOrThrow('CENTRAL_DATABASE_URL');
   }
 
-  // === TENANT DATABASE ===
-  get tenantDbHost(): AppEnv['TENANT_DB_HOST'] {
-    return this.configService.getOrThrow('TENANT_DB_HOST');
-  }
-  get tenantDbPort(): AppEnv['TENANT_DB_PORT'] {
-    return this.configService.getOrThrow('TENANT_DB_PORT');
-  }
-  get tenantDbUser(): AppEnv['TENANT_DB_USER'] {
-    return this.configService.getOrThrow('TENANT_DB_USER');
-  }
-  get tenantDbPassword(): AppEnv['TENANT_DB_PASSWORD'] {
-    return this.configService.getOrThrow('TENANT_DB_PASSWORD');
-  }
-  get tenantDbName(): AppEnv['TENANT_DB_NAME'] {
-    return this.configService.getOrThrow('TENANT_DB_NAME');
-  }
-  get tenantDbUrl(): AppEnv['TENANT_DATABASE_URL'] {
-    return this.configService.getOrThrow('TENANT_DATABASE_URL');
-  }
-
   // === Docker ===
   get composeProjectName(): AppEnv['COMPOSE_PROJECT_NAME'] {
     return this.configService.getOrThrow('COMPOSE_PROJECT_NAME');

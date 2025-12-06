@@ -30,23 +30,6 @@ services:
       timeout: 5s
       retries: 10
 
-  tenant-db:
-    image: postgres:15
-    container_name: tenant-db
-    environment:
-      POSTGRES_USER: ${TENANT_DB_USER:-admin}
-      POSTGRES_PASSWORD: ${TENANT_DB_PASSWORD:-1234}
-      POSTGRES_DB: ${TENANT_DB_NAME:-mydb2}
-    ports:
-      - "${TENANT_DB_EXTERNAL_PORT:-5434}:5432"
-    volumes:
-      - pgdata_tenant_${NODE_ENV:-development}:/var/lib/postgresql/data
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U ${TENANT_DB_USER:-admin} -d ${TENANT_DB_NAME:-mydb2}" ]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-
 volumes:
   pgdata_central_development:
   pgdata_central_test:

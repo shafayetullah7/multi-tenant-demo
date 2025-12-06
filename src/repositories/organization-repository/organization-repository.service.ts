@@ -1,40 +1,33 @@
 import { Injectable } from '@nestjs/common';
 import { and, eq, sql } from 'drizzle-orm';
-import { CentralDB } from 'src/_db/central_db/central_db.service';
+import { DrizzleService } from 'src/_db/drizzle/drizzle.service';
 import {
   organizationTable,
   TNewOrganization,
   TOrganization,
-} from 'src/_db/central_db/tables';
-import { CentralDbTx } from 'src/_db/central_db/types/drizzle.client';
-import { TCentralLockTransaction } from 'src/_db/central_db/types/lock.transaction';
-import { TenantDbTx } from 'src/_db/tenant_db/types/drizzle.client';
+} from 'src/_db/drizzle/tables';
+import { DrizzleTx } from 'src/_db/drizzle/types/drizzle.client';
+import { TLockTransaction } from 'src/_db/drizzle/types/lock.transaction';
 
 @Injectable()
 export class OrganizationRepositoryService {
-  constructor(private readonly db: CentralDB) {}
+  constructor(private readonly db: DrizzleService) {}
 
   async createOrganization(
     payload: TNewOrganization,
-    centralTx: CentralDbTx,
-    tenantTx: TenantDbTx,
+    centralTx: DrizzleTx,
   ): Promise<TOrganization> {
     const [newOrganization] = await centralTx
       .insert(organizationTable)
       .values(payload)
       .returning();
 
-    const tenantId = newOrganization.tenantId;
-
-    const schema = `tenant_${tenantId}`;
-    await tenantTx.execute(sql.raw(`CREATE SCHEMA IF NOT EXISTS "${schema}";`));
-
     return newOrganization;
   }
 
   async getOrganizationByName(
     name: string,
-    transaction?: TCentralLockTransaction,
+    transaction?: TLockTransaction,
   ): Promise<TOrganization | null> {
     const executor = this.db.getExecutor(transaction?.tx);
     const baseQuery = executor

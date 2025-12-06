@@ -1,1 +1,0 @@
-export const TENANT_DB = Symbol('TENANT_DB');
